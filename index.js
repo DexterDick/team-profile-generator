@@ -11,11 +11,89 @@ const createTeam = [];
 
 (function init() {
     // start app
+    addManager();
 })();
 
-function addManager() {}
+function addManager() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "Please enter team manager name?",
+                validate: (nameInput) => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter team manager's name!");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "Team Manager's ID number:",
+                validate: (idInput) => {
+                    if (idInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter number for Id!");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "Team Manager's email address:",
+                validate: (emailInput) => {
+                    if (emailInput) {
+                        return true;
+                    } else {
+                        console.log(
+                            "Please enter valid email eg. dex@gmail.com"
+                        );
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "officeNumber",
+                message: "Team Manager's office number:",
+                validate: (officeNumInput) => {
+                    if (officeNumInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter valid office number!");
+                        return false;
+                    }
+                },
+            },
+        ])
+        .then((answers) => {
+            // Create new manager to store answers
+            const manager = new Manager(
+                answers.name,
+                answers.id,
+                answers.email,
+                answers.officeNumber
+            );
 
-function addTeamMember() {}
+            // push manager into array for later use
+
+            createTeam.push(manager);
+
+            // call add teamTeam member
+
+            addTeamMember();
+        });
+}
+
+function addTeamMember() {
+    console.log(createTeam);
+}
 
 function addIntern() {}
 
