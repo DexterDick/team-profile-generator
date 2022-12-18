@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: blue;
+    text-align: center;
+    color: #fff;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+}
+
+.flex {
+    display: flex;
+    gap: 0.5rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}

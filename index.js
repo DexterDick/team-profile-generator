@@ -6,6 +6,8 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 
+const generateHTML = require("./scr/generateHTML");
+
 // Holds team members to be used to generate Html;
 const createTeam = [];
 
@@ -91,16 +93,198 @@ function addManager() {
         });
 }
 
-function addTeamMember() {
-    console.log(createTeam);
+function addIntern() {
+    console.log("adding an intern");
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "Please enter name of intern?",
+                validate: (nameInput) => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter intern name!");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "Intern ID number:",
+                validate: (idInput) => {
+                    if (idInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter number for Id!");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "Intern email address:",
+                validate: (emailInput) => {
+                    if (emailInput) {
+                        return true;
+                    } else {
+                        console.log(
+                            "Please enter valid email eg. dex@gmail.com"
+                        );
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "school",
+                message: "Name of intern's school:",
+                validate: (schoolInput) => {
+                    if (schoolInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter valid school name!");
+                        return false;
+                    }
+                },
+            },
+        ])
+        .then((answers) => {
+            // Create new Intern to store answers
+            const intern = new Intern(
+                answers.name,
+                answers.id,
+                answers.email,
+                answers.school
+            );
+
+            // push Intern into array for later use
+
+            createTeam.push(intern);
+
+            // call add teamTeam member
+
+            addTeamMember();
+        });
 }
 
-function addIntern() {}
+function addEngineer() {
+    console.log("adding an Engineer");
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "Please enter name of engineer?",
+                validate: (nameInput) => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter engineer name!");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "Engineer ID number:",
+                validate: (idInput) => {
+                    if (idInput) {
+                        return true;
+                    } else {
+                        console.log("Please enter number for Id!");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "Engineer email address:",
+                validate: (emailInput) => {
+                    if (emailInput) {
+                        return true;
+                    } else {
+                        console.log(
+                            "Please enter valid email eg. dex@gmail.com"
+                        );
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "gitHub",
+                message: "Enter GitHub repository username:",
+                validate: (gitHubInput) => {
+                    if (gitHubInput) {
+                        return true;
+                    } else {
+                        console.log(
+                            "Please enter valid GitHub repository name!"
+                        );
+                        return false;
+                    }
+                },
+            },
+        ])
+        .then((answers) => {
+            // Create new Engineer to store answers
+            const engineer = new Engineer(
+                answers.name,
+                answers.id,
+                answers.email,
+                answers.gitHub
+            );
 
-function addEngineer() {}
+            // push engineer into array for later use
 
-function creatFile() {
-    // use to generate html file
+            createTeam.push(engineer);
+
+            // call add teamTeam member
+
+            addTeamMember();
+        });
+}
+// add tem member function adds team menbers until we exit function
+function addTeamMember() {
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "teamMemberChoice",
+                message:
+                    "Would you like to add an Engineer or Intern to the team?",
+                choices: [
+                    "Engineer",
+                    "Intern",
+                    "(Exit) finish building my team",
+                ],
+            },
+        ])
+        .then((answers) => {
+            if (answers.teamMemberChoice === "Engineer") {
+                addEngineer();
+            } else if (answers.teamMemberChoice === "Intern") {
+                addIntern();
+            } else if (
+                answers.teamMemberChoice === "(Exit) finish building my team"
+            ) {
+                // Exit and create html file pass data to generateHTML
+                console.log(createTeam);
+                const htmlPageContent = generateHTML(createTeam);
+
+                fs.writeFile("./dist/index.html", htmlPageContent, (err) =>
+                    err
+                        ? console.log(err)
+                        : console.log("Successfully created index.html!")
+                );
+            }
+        });
 }
 
 // ├── __tests__/             //jest tests
