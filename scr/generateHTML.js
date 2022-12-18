@@ -23,9 +23,12 @@ const htmlFooter = `   </main>
 </html>
 `;
 function generateHTML(data) {
+    // used to store all employee cards
     let employeCard = [];
     let role;
+    // Push header of html into array
     employeCard.push(htmlHeader);
+    // loop through data to generate card for each employee
     data.forEach((employee) => {
         role = employee.getRole();
 
@@ -71,13 +74,12 @@ function generateHTML(data) {
             </li>
         </ul>
     </article>`;
+        // push each card in employeCard array
         employeCard.push(card);
     });
 
+    // push footer of html into employeCard array
     employeCard.push(htmlFooter);
-
-    // console.log(employeCard);
-
     return employeCard.join("");
 }
 module.exports = generateHTML;

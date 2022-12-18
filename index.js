@@ -94,7 +94,6 @@ function addManager() {
 }
 
 function addIntern() {
-    console.log("adding an intern");
     inquirer
         .prompt([
             {
@@ -172,7 +171,6 @@ function addIntern() {
 }
 
 function addEngineer() {
-    console.log("adding an Engineer");
     inquirer
         .prompt([
             {
@@ -250,7 +248,7 @@ function addEngineer() {
             addTeamMember();
         });
 }
-// add tem member function adds team menbers until we exit function
+// add team member function adds team members until we exit function
 function addTeamMember() {
     inquirer
         .prompt([
@@ -275,8 +273,9 @@ function addTeamMember() {
                 answers.teamMemberChoice === "(Exit) finish building my team"
             ) {
                 // Exit and create html file pass data to generateHTML
-                console.log(createTeam);
                 const htmlPageContent = generateHTML(createTeam);
+
+                // write html conent to file
 
                 fs.writeFile("./dist/index.html", htmlPageContent, (err) =>
                     err
@@ -286,15 +285,3 @@ function addTeamMember() {
             }
         });
 }
-
-// ├── __tests__/             //jest tests
-// │   ├── Employee.test.js
-// │   ├── Engineer.test.js
-// │   ├── Intern.test.js
-// │   └── Manager.test.js
-// ├── dist/                  // rendered output (HTML) and CSS style sheet
-// ├── lib/                   // classes
-// ├── src/                   // template helper code
-// ├── .gitignore             // indicates which folders and files Git should ignore
-// ├── index.js               // runs the application
-// └── package.json
