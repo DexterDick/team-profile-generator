@@ -12,8 +12,16 @@ To ensure the code is maintainable unit test using JEST and inquirer were done o
 
 You will find a demonstration of the node Js application with unit testing below.
 
-https://github.com/DexterDick/team-profile-generator
+[Github Link](https://github.com/DexterDick/team-profile-generator)
 
 ## Screenshot
 
-## walkthrough video
+![My Team Desktop](./assets/team-desktop.png)
+
+![My Team Mobile](./assets/team-mobile.png)
+
+## Walkthrough video
+
+![walkthrough video screen shot](./assets/Screenshot.png)
+
+https://drive.google.com/file/d/1lRYhrEgVZfougzOrl3Ft5Vr3WPtRegmV/view
