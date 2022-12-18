@@ -29,17 +29,25 @@ function generateHTML(data) {
     data.forEach((employee) => {
         role = employee.getRole();
 
-        let card = `<article class="card" style="width: 18rem">
+        let card = `<article class="card">
         <div class="card-top">
             <h5>${employee.name}</h5>
             <div class="flex">
-                <i class="fa-solid fa-user"></i>
+            ${(() => {
+                if (role === "Manager") {
+                    return `<i class="fa-solid fa-user"></i>`;
+                } else if (role === "Engineer") {
+                    return `<i class="fa-solid fa-person"></i>`;
+                } else if (role === "Intern") {
+                    return `<i class="fa-sharp fa-solid fa-graduation-cap"></i>`;
+                }
+            })()}
                 <p>${role}</p>
             </div>
         </div>
         <ul>
-            <li>${employee.getId()}</li>
-            <li>
+            <li>ID:&nbsp;${employee.getId()}</li>
+            <li>Email:&nbsp;
                 <a
                     href="mailto:${employee.getEmail()}?subject=Mail from Our Site"
                     >${employee.getEmail()}</a
@@ -49,9 +57,9 @@ function generateHTML(data) {
         
              ${(() => {
                  if (role === "Manager") {
-                     return ` Offic number: ${employee.officeNumber}`;
+                     return ` Office number: ${employee.officeNumber}`;
                  } else if (role === "Engineer") {
-                     return ` Github <a href="#" target="_blank">
+                     return ` Github <a href="https://github.com/${employee.gitHub}" target="_blank">
                          ${employee.gitHub}
                      </a>`;
                  } else if (role === "Intern") {
